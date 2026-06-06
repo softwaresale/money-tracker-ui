@@ -13,6 +13,9 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
+      "@api-client": [
+        "./libs/api-client/index.ts"
+      ],
       "@spartan-ng/helm/accordion": [
         "./libs/ui/accordion/src/index.ts"
       ],

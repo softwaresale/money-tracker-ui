@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
-import { HouseholdExpensesPage } from './household-expenses-page/household-expenses-page';
-import { AddExpensePage } from './household-expenses-page/add-expense-page/add-expense-page';
 import { authGuard } from '@edgeflare/ngx-oidc';
+import { HouseholdPage } from './pages/household-page/household-page';
+import { WindowView } from './pages/household-page/window-view/window-view';
+import { householdMetadataResolver } from './pages/household-page/household-metadata-resolver';
+import { windowResolver } from './pages/household-page/window-view/window-resolver';
 
 export const routes: Routes = [
     {
@@ -10,16 +12,23 @@ export const routes: Routes = [
         canActivateChild: [authGuard],
         children: [
             {
-                path: ':id',
+                path: ':householdId',
+                component: HouseholdPage,
+                resolve: {
+                    householdMetadata: householdMetadataResolver,
+                },
                 children: [
                     {
-                        path: '',
-                        pathMatch: 'full',
-                        component: HouseholdExpensesPage,
-                    },
-                    {
-                        path: 'expenses',
-                        component: AddExpensePage,
+                        path: 'window',
+                        children: [
+                            {
+                                path: ':windowId',
+                                component: WindowView,
+                                resolve: {
+                                    expenseWindow: windowResolver,
+                                }
+                            }
+                        ]
                     }
                 ]
             }

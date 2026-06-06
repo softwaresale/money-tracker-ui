@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddExpensePage } from './add-expense-page';
+import { WindowView } from './window-view';
 
-describe('AddExpensePage', () => {
-  let component: AddExpensePage;
-  let fixture: ComponentFixture<AddExpensePage>;
+describe('WindowView', () => {
+  let component: WindowView;
+  let fixture: ComponentFixture<WindowView>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddExpensePage]
+      imports: [WindowView]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddExpensePage);
+    fixture = TestBed.createComponent(WindowView);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

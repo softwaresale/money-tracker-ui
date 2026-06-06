@@ -5,6 +5,7 @@ import { initOidc, OIDC_ROUTES, authzTokenInterceptor } from '@edgeflare/ngx-oid
 
 import { routes } from './app.routes';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { provideDefaultClient } from '@api-client';
 
 const oidcConfig: UserManagerSettings = {
   authority: 'https://salefamily-hdmlgu.us1.zitadel.cloud/',
@@ -28,5 +29,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withComponentInputBinding()),
 
     provideHttpClient(withFetch(), withInterceptors([authzTokenInterceptor])),
+
+    provideDefaultClient({
+      basePath: '',
+    }),
   ]
 };
