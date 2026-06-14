@@ -32,7 +32,7 @@ import type { ClassValue } from 'clsx';
 			[variant]="variant()"
 		>
 			<ng-content />
-			<ng-icon name="lucideChevronDown" />
+			<ng-icon name="lucideChevronDown" class="text-muted-foreground text-[calc(var(--spacing)*4)]" />
 		</button>
 	`,
 })

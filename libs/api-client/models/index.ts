@@ -65,6 +65,14 @@ export interface HouseholdCreateRequest {
     name: string;
 }
 
+export interface VariableExpenseCreateRequest {
+    description: string;
+    paidByUserID: string;
+    amount: DollarAmount;
+    paidOn: string;
+    categoryGuid: string;
+}
+
 /** Request Options for Angular HttpClient requests */
 export interface RequestOptions<TResponseType extends 'arraybuffer' | 'blob' | 'json' | 'text'> {
     headers?: HttpHeaders;

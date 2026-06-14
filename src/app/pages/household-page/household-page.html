@@ -1,8 +1,13 @@
 
 <div appCenteredContentContainer>
     <div appCenteredContent appBasePage>
-        <div>
-            <h1>{{ householdName() }}</h1>
+        <div class="flex justify-between">
+            <h1 hlmH2>{{ householdName() }}</h1>
+
+            <a hlmBtn variant="outline" size="sm">
+                <ng-icon hlm name="settings"></ng-icon>
+                Settings
+            </a>
         </div>
 
         <!-- household sub-page -->

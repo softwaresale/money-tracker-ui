@@ -1,0 +1,46 @@
+
+<div>
+    <form [formRoot]="form">
+        <hlm-field-group>
+            <hlm-field>
+                <label hlmFieldLabel>Description</label>
+                <input hlmInput
+                placeholder="Ex. Toiletries from Target"
+                [formField]="form.description" />
+            </hlm-field>
+            <hlm-field>
+                <label hlmFieldLabel>Amount</label>
+                <hlm-input-group>
+                    <hlm-input-group-addon>
+                        <span hlmInputGroupText>$</span>
+                    </hlm-input-group-addon>
+                    <input hlmInputGroupInput [formField]="form.amount" type="number" step="0.01"/>
+                </hlm-input-group>
+            </hlm-field>
+            <hlm-field>
+                <label hlmFieldLabel for="paid-on-date">Paid On</label>
+                <hlm-date-picker [formField]="form.paidOn" [autoCloseOnSelect]="true">
+                    <hlm-date-picker-trigger class="w-full">Select paid on date</hlm-date-picker-trigger>
+                </hlm-date-picker>
+            </hlm-field>
+            @if (!categories.isLoading()) {
+                <hlm-field>
+                    <label hlmFieldLabel>Category</label>
+                    <hlm-native-select [formField]="form.categoryGuid">
+                        <option hlmNativeSelectOption value="">Select a category</option>
+                        @for (category of categories.value(); track category.guid) {
+                            <option hlmNativeSelectOption [value]="category.guid">{{ category.name }}</option>
+                        }
+                    </hlm-native-select>
+                </hlm-field>
+            }
+            
+            <button hlmBtn type="submit" [disabled]="form().invalid()">
+                @if (form().submitting()) {
+                    <hlm-spinner></hlm-spinner>
+                }
+                Save Expense
+            </button>
+        </hlm-field-group>
+    </form>
+</div>

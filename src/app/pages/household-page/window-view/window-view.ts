@@ -5,12 +5,22 @@ import { HlmTypographyImports } from "@spartan-ng/helm/typography";
 import { ExpenseList } from "./expense-list/expense-list";
 import { DatePipe } from '@angular/common';
 import { HlmTabsImports } from '@spartan-ng/helm/tabs';
+import { RouterLink } from "@angular/router";
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideCircleDollarSign, lucidePlusCircle } from '@ng-icons/lucide';
+import { HlmIcon } from "@spartan-ng/helm/icon";
 
 @Component({
   selector: 'app-window-view',
-  imports: [HlmButton, HlmTypographyImports, ExpenseList, DatePipe, HlmTabsImports],
+  imports: [HlmButton, HlmTypographyImports, ExpenseList, DatePipe, HlmTabsImports, RouterLink, HlmIcon, NgIcon],
   templateUrl: './window-view.html',
   styleUrl: './window-view.css',
+  providers: [
+    provideIcons({
+      add: lucidePlusCircle,
+      settle: lucideCircleDollarSign,
+    })
+  ]
 })
 export class WindowView {
 

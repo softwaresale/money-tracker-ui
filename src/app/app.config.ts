@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideRouter, withComponentInputBinding, withRouterConfig } from '@angular/router';
 import { UserManagerSettings } from 'oidc-client-ts';
 import { initOidc, OIDC_ROUTES, authzTokenInterceptor } from '@edgeflare/ngx-oidc';
 
@@ -26,7 +26,11 @@ export const appConfig: ApplicationConfig = {
     initOidc(oidcConfig),
     provideRouter(OIDC_ROUTES),
 
-    provideRouter(routes, withComponentInputBinding()),
+    provideRouter(
+      routes,
+      withRouterConfig({ paramsInheritanceStrategy: 'always' }),
+      withComponentInputBinding()
+    ),
 
     provideHttpClient(withFetch(), withInterceptors([authzTokenInterceptor])),
 

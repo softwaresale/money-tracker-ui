@@ -4,6 +4,7 @@ import { HouseholdPage } from './pages/household-page/household-page';
 import { WindowView } from './pages/household-page/window-view/window-view';
 import { householdMetadataResolver } from './pages/household-page/household-metadata-resolver';
 import { windowResolver } from './pages/household-page/window-view/window-resolver';
+import { VariableExpenseFormSubpage } from "./pages/household-page/window-view/variable-expense-form-subpage/variable-expense-form-subpage";
 
 export const routes: Routes = [
     {
@@ -27,6 +28,10 @@ export const routes: Routes = [
                                 resolve: {
                                     expenseWindow: windowResolver,
                                 }
+                            },
+                            {
+                                path: ':windowId/expense-form',
+                                component: VariableExpenseFormSubpage,
                             }
                         ]
                     }

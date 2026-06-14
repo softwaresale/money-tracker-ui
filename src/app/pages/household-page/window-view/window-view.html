@@ -5,10 +5,16 @@
         <span hlmH4>Expenses Since {{ expenseWindow().startDate | date }}</span>
     </div>
 
-    <div class="flex flex-col gap-1">
+    <div class="flex flex-col sm:flex-row gap-1">
         <!-- Actions box -->
-         <button hlmBtn>Add Expense</button>
-         <button hlmBtn variant="outline">Settle Expenses</button>
+         <a hlmBtn routerLink="expense-form" class="sm:flex-1">
+            <ng-icon hlmIcon name="add"></ng-icon>
+            Add Expense
+        </a>
+         <a hlmBtn variant="outline" class="sm:flex-1">
+            <ng-icon hlmIcon name="settle"></ng-icon>
+            Settle Up
+         </a>
     </div>
 
     <hlm-tabs tab="variable">
