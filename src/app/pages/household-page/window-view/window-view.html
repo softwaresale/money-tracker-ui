@@ -1,7 +1,28 @@
 
-<div>
+<div class="flex flex-col gap-4">
+
     <div>
-        <h1>Current spending window</h1>
-        <p>{{ windowId() }}</p>
+        <span hlmH4>Expenses Since {{ expenseWindow().startDate | date }}</span>
     </div>
+
+    <div class="flex flex-col gap-1">
+        <!-- Actions box -->
+         <button hlmBtn>Add Expense</button>
+         <button hlmBtn variant="outline">Settle Expenses</button>
+    </div>
+
+    <hlm-tabs tab="variable">
+        <hlm-tabs-list>
+            <button hlmTabsTrigger="variable">Variable Expenses</button>
+            <button hlmTabsTrigger="fixed">Fixed Expenses</button>
+        </hlm-tabs-list>
+
+        <div hlmTabsContent="variable">
+            <app-expense-list [expenses]="expenseWindow().variableExpenses" title="Variable Expenses"></app-expense-list>
+        </div>
+
+        <div hlmTabsContent="fixed">
+            <app-expense-list [expenses]="expenseWindow().fixedExpenses" title="Fixed Expenses"></app-expense-list>
+        </div>
+    </hlm-tabs>
 </div>

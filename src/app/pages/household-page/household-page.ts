@@ -1,8 +1,8 @@
-import { Component, computed, inject, input, OnInit, signal } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { CenteredContentContainer, CenteredContent } from "../../shared/centered-content/centered-content";
 import { BasePage } from "../../base-page/base-page";
 import { RouterOutlet } from '@angular/router';
-import { HouseholdMetadata, HouseholdPageService, HouseholdPageView } from '@api-client';
+import { Household } from '@api-client';
 
 @Component({
   selector: 'app-household-page',
@@ -12,7 +12,7 @@ import { HouseholdMetadata, HouseholdPageService, HouseholdPageView } from '@api
 })
 export class HouseholdPage {
   readonly householdId = input.required<string>();
-  readonly householdMetadata = input.required<HouseholdMetadata>();
+  readonly household = input.required<Household>();
 
-  protected readonly householdName = computed(() => this.householdMetadata().name);
+  protected readonly householdName = computed(() => this.household().name);
 }

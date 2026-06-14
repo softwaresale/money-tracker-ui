@@ -15,7 +15,7 @@ export const routes: Routes = [
                 path: ':householdId',
                 component: HouseholdPage,
                 resolve: {
-                    householdMetadata: householdMetadataResolver,
+                    household: householdMetadataResolver,
                 },
                 children: [
                     {
