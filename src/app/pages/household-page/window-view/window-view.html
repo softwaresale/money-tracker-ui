@@ -1,33 +1,53 @@
 
 <div class="flex flex-col gap-4">
-
+    
     <div>
         <span hlmH4>Expenses Since {{ expenseWindow().startDate | date }}</span>
     </div>
-
-    <div class="flex flex-col sm:flex-row gap-1">
+    
+    <div appActionBox>
         <!-- Actions box -->
-         <a hlmBtn routerLink="expense-form" class="sm:flex-1">
-            <ng-icon hlmIcon name="add"></ng-icon>
-            Add Expense
+         <a hlmBtn variant="default" size="lg">
+            @if (expenseWindow().paidDate === undefined) {
+                <ng-icon hlmIcon name="settle"></ng-icon>
+                Settle Up
+            }
+            @else {
+                <ng-icon hlmIcon name="view"></ng-icon>
+                View Settlement
+            }
+            
         </a>
-         <a hlmBtn variant="outline" class="sm:flex-1">
-            <ng-icon hlmIcon name="settle"></ng-icon>
-            Settle Up
-         </a>
     </div>
-
+    
     <hlm-tabs tab="variable">
-        <hlm-tabs-list>
+        <hlm-tabs-list class="w-full">
+            <button hlmTabsTrigger="summary">Summary</button>
             <button hlmTabsTrigger="variable">Variable Expenses</button>
             <button hlmTabsTrigger="fixed">Fixed Expenses</button>
         </hlm-tabs-list>
-
-        <div hlmTabsContent="variable">
-            <app-expense-list [expenses]="expenseWindow().variableExpenses" title="Variable Expenses"></app-expense-list>
+        
+        <div hlmTabsContent="summary" class="flex flex-col gap-4">
+            <h1>Summary will go here</h1>
         </div>
 
-        <div hlmTabsContent="fixed">
+        <div hlmTabsContent="variable" class="flex flex-col gap-4">
+            <div appActionBox>
+                <a hlmBtn variant="secondary" routerLink="expense-form">
+                    <ng-icon hlmIcon name="add"></ng-icon>
+                    Add Expense
+                </a>
+            </div>
+            <app-expense-list [expenses]="expenseWindow().variableExpenses" title="Variable Expenses"></app-expense-list>
+        </div>
+        
+        <div hlmTabsContent="fixed" class="flex flex-col gap-4">
+            <div appActionBox>
+                <a hlmBtn variant="secondary">
+                    <ng-icon hlmIcon name="edit"></ng-icon>
+                    Manage Fixed Expenses
+                </a>
+            </div>
             <app-expense-list [expenses]="expenseWindow().fixedExpenses" title="Fixed Expenses"></app-expense-list>
         </div>
     </hlm-tabs>

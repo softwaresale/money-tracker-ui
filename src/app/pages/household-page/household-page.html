@@ -1,16 +1,81 @@
 
 <div appCenteredContentContainer>
     <div appCenteredContent appBasePage>
-        <div class="flex justify-between">
-            <h1 hlmH2>{{ householdName() }}</h1>
+        <hlm-sheet #sheetRef>
+            <div class="flex justify-between">
+                <h1 hlmH2>{{ householdName() }}</h1>
+                
+                <button hlmBtn hlmSheetTrigger variant="outline" side="right">
+                    <ng-icon hlmIcon name="more"></ng-icon>
+                    Navigate
+                </button>
+            </div>
+            
+            <!-- household sub-page -->
+            <router-outlet></router-outlet>
+            
+            <hlm-sheet-content *hlmSheetPortal="let ctx">
+                <hlm-sheet-header>
+                    <span hlmSheetTitle>{{ householdName() }}</span>
+                    <span hlmSheetDescription>Navigate to:</span>
+                </hlm-sheet-header>
+                
+                <div appNavGroupContainer>
+                    <a hlmItem variant="outline" [routerLink]="householdViewRoute()" (click)="sheetRef.close()">
+                        <hlm-item-content>
+                            <span hlmItemTitle>View Household</span>
+                            <span hlmItemDescription>Go to household page</span>
+                        </hlm-item-content>
+                        <hlm-item-actions>
+                            <ng-icon hlmIcon name="goto"></ng-icon>
+                        </hlm-item-actions>
+                    </a>
+                </div>
+                
+                <div appNavGroupContainer>
+                    <span hlmLead>Recent Windows</span>
+                    @for (recentWindow of recentWindows(); track recentWindow.guid) {
+                        <a hlmItem variant="outline" [routerLink]="['window', recentWindow.guid]" (click)="sheetRef.close()">
+                            <hlm-item-content>
+                                <span hlmItemTitle>{{ recentWindow.startDate | date }}</span>
+                            </hlm-item-content>
+                            <hlm-item-actions>
+                                <ng-icon hlmIcon name="goto"></ng-icon>
+                            </hlm-item-actions>
+                        </a>
+                    }
+                    @empty {
+                        <p>No recent windows</p>
+                    }
+                </div>
+                
+                <div appNavGroupContainer>
+                    <span hlmLead>Manage</span>
+                    <a hlmItem variant="outline" routerLink="categories" (click)="sheetRef.close()">
+                        <hlm-item-content>
+                            <span hlmItemTitle>Categories</span>
+                            <span hlmItemDescription>Manage expense categories</span>
+                        </hlm-item-content>
+                        <hlm-item-actions>
+                            <ng-icon hlmIcon name="goto"></ng-icon>
+                        </hlm-item-actions>
+                    </a>
 
-            <a hlmBtn variant="outline" size="sm">
-                <ng-icon hlm name="settings"></ng-icon>
-                Settings
-            </a>
-        </div>
-
-        <!-- household sub-page -->
-        <router-outlet></router-outlet>
+                    <a hlmItem variant="outline" routerLink="fixed-expenses" (click)="sheetRef.close()">
+                        <hlm-item-content>
+                            <span hlmItemTitle>Fixed Expenses</span>
+                            <span hlmItemDescription>Manage recurring expenses</span>
+                        </hlm-item-content>
+                        <hlm-item-actions>
+                            <ng-icon hlmIcon name="goto"></ng-icon>
+                        </hlm-item-actions>
+                    </a>
+                </div>
+                
+                <hlm-sheet-footer>
+                    <span>Footer</span>
+                </hlm-sheet-footer>
+            </hlm-sheet-content>
+        </hlm-sheet>
     </div>
 </div>

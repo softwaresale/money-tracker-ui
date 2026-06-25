@@ -2,9 +2,14 @@
 <hlm-item variant="outline">
     <hlm-item-content>
         <hlm-item-title>{{ expense().description }}</hlm-item-title>
-        <hlm-item-description>
-            <span hlmBadge>{{ description() }}</span>
-        </hlm-item-description>
+        @if (expense().category; as categorySnapshot) {
+            <hlm-item-description>
+                <!--
+                <span hlmBadge>{{ description() }}</span>
+                -->
+                <app-category-chip [category]="categorySnapshot"></app-category-chip>
+            </hlm-item-description>
+        }
     </hlm-item-content>
 
     <hlm-item-content>

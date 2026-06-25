@@ -12,7 +12,7 @@ import { HttpContext, HttpContextToken, HttpHeaders, HttpParams, httpResource, H
 import { inject, Injectable, Signal } from "@angular/core";
 import { BASE_PATH_DEFAULT, CLIENT_CONTEXT_TOKEN_DEFAULT } from "../tokens";
 import { HttpParamsBuilder } from "../utils/http-params-builder";
-import { ExpenseCategory } from "../models";
+import { ExpenseCategoryMetadata, ExpenseCategory } from "../models";
 
 @Injectable({ providedIn: "root" })
 export class ExpenseCategoryResource {
@@ -24,9 +24,9 @@ export class ExpenseCategoryResource {
         return context.set(this.clientContextToken, 'default');
     }
 
-    getExpenseCategoriesForHousehold(householdGuid: Signal<string> | string, resourceOptions: HttpResourceOptions<Array<ExpenseCategory>, unknown> & { defaultValue: NoInfer<Array<ExpenseCategory>> }, requestOptions?: Omit<HttpResourceRequest, "method" | "url" | "params">): HttpResourceRef<Array<ExpenseCategory>>;
-    getExpenseCategoriesForHousehold(householdGuid: Signal<string> | string, resourceOptions?: HttpResourceOptions<Array<ExpenseCategory>, unknown>, requestOptions?: Omit<HttpResourceRequest, "method" | "url" | "params">): HttpResourceRef<Array<ExpenseCategory> | undefined>;
-    getExpenseCategoriesForHousehold(householdGuid: Signal<string> | string, resourceOptions?: HttpResourceOptions<Array<ExpenseCategory>, unknown>, requestOptions?: Omit<HttpResourceRequest, "method" | "url" | "params">): HttpResourceRef<Array<ExpenseCategory> | undefined> {
+    getExpenseCategoriesForHousehold(householdGuid: Signal<string> | string, resourceOptions: HttpResourceOptions<Array<ExpenseCategoryMetadata>, unknown> & { defaultValue: NoInfer<Array<ExpenseCategoryMetadata>> }, requestOptions?: Omit<HttpResourceRequest, "method" | "url" | "params">): HttpResourceRef<Array<ExpenseCategoryMetadata>>;
+    getExpenseCategoriesForHousehold(householdGuid: Signal<string> | string, resourceOptions?: HttpResourceOptions<Array<ExpenseCategoryMetadata>, unknown>, requestOptions?: Omit<HttpResourceRequest, "method" | "url" | "params">): HttpResourceRef<Array<ExpenseCategoryMetadata> | undefined>;
+    getExpenseCategoriesForHousehold(householdGuid: Signal<string> | string, resourceOptions?: HttpResourceOptions<Array<ExpenseCategoryMetadata>, unknown>, requestOptions?: Omit<HttpResourceRequest, "method" | "url" | "params">): HttpResourceRef<Array<ExpenseCategoryMetadata> | undefined> {
 
         let headers: HttpHeaders;
         if (requestOptions?.headers instanceof HttpHeaders) {
@@ -37,6 +37,27 @@ export class ExpenseCategoryResource {
         return httpResource(() => {
             return {
                 url: `${this.basePath}/api/v1/household/${typeof householdGuid === 'function' ? householdGuid() : householdGuid}/expense-category`,
+                method: "GET",
+                headers,
+                context: this.createContextWithClientId(requestOptions?.context),
+                ...requestOptions
+            }
+        }, resourceOptions);
+    }
+
+    getExpenseCategoryById(expenseCategoryGuid: Signal<string> | string, resourceOptions: HttpResourceOptions<ExpenseCategory, unknown> & { defaultValue: NoInfer<ExpenseCategory> }, requestOptions?: Omit<HttpResourceRequest, "method" | "url" | "params">): HttpResourceRef<ExpenseCategory>;
+    getExpenseCategoryById(expenseCategoryGuid: Signal<string> | string, resourceOptions?: HttpResourceOptions<ExpenseCategory, unknown>, requestOptions?: Omit<HttpResourceRequest, "method" | "url" | "params">): HttpResourceRef<ExpenseCategory | undefined>;
+    getExpenseCategoryById(expenseCategoryGuid: Signal<string> | string, resourceOptions?: HttpResourceOptions<ExpenseCategory, unknown>, requestOptions?: Omit<HttpResourceRequest, "method" | "url" | "params">): HttpResourceRef<ExpenseCategory | undefined> {
+
+        let headers: HttpHeaders;
+        if (requestOptions?.headers instanceof HttpHeaders) {
+            headers = requestOptions.headers;
+        } else {
+            headers = new HttpHeaders(requestOptions?.headers as Record<string, string>);
+        }
+        return httpResource(() => {
+            return {
+                url: `${this.basePath}/api/v1/expense-category/${typeof expenseCategoryGuid === 'function' ? expenseCategoryGuid() : expenseCategoryGuid}`,
                 method: "GET",
                 headers,
                 context: this.createContextWithClientId(requestOptions?.context),

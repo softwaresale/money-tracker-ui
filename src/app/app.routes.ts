@@ -5,6 +5,14 @@ import { WindowView } from './pages/household-page/window-view/window-view';
 import { householdMetadataResolver } from './pages/household-page/household-metadata-resolver';
 import { windowResolver } from './pages/household-page/window-view/window-resolver';
 import { VariableExpenseFormSubpage } from "./pages/household-page/window-view/variable-expense-form-subpage/variable-expense-form-subpage";
+import { CategoriesSubpage } from './pages/household-page/categories-subpage/categories-subpage';
+import { categoriesResolver } from './pages/household-page/categories-subpage/categories-resolver';
+import { CreateCategorySubpage } from './pages/household-page/categories-subpage/create-category-subpage/create-category-subpage';
+import { CategoryView } from './pages/household-page/category-view/category-view';
+import { categoryResolver } from './pages/household-page/category-view/category-resolver';
+import { FixedExpenseSubpage } from './pages/household-page/fixed-expense-subpage/fixed-expense-subpage';
+import { FixedExpenseCreate } from './pages/household-page/fixed-expense-subpage/fixed-expense-create/fixed-expense-create';
+import { fixedExpensesResolver } from './pages/household-page/fixed-expense-subpage/fixed-expenses-resolver';
 
 export const routes: Routes = [
     {
@@ -32,6 +40,47 @@ export const routes: Routes = [
                             {
                                 path: ':windowId/expense-form',
                                 component: VariableExpenseFormSubpage,
+                            }
+                        ]
+                    },
+                    {
+                        path: 'categories',
+                        children: [
+                            {
+                                path: '',
+                                pathMatch: 'full',
+                                component: CategoriesSubpage,
+                                resolve: {
+                                    categories: categoriesResolver,
+                                }
+                            },
+                            {
+                                path: 'create',
+                                component: CreateCategorySubpage,
+                            },
+                            {
+                                path: ':categoryId',
+                                component: CategoryView,
+                                resolve: {
+                                    category: categoryResolver,
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        path: 'fixed-expenses',
+                        children: [
+                            {
+                                path: '',
+                                pathMatch: 'full',
+                                component: FixedExpenseSubpage,
+                                resolve: {
+                                    fixedExpenses: fixedExpensesResolver,
+                                }
+                            },
+                            {
+                                path: 'create',
+                                component: FixedExpenseCreate,
                             }
                         ]
                     }

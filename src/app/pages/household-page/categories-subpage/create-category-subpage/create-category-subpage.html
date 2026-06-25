@@ -1,0 +1,22 @@
+
+<div class="flex flex-col gap-4">
+    <form [formRoot]="form">
+        <hlm-field-group>
+            <hlm-field>
+                <label hlmFieldLabel>Category Name</label>
+                <input hlmInput [formField]="form.name" placeholder="Ex. Groceries">
+            </hlm-field>
+            <hlm-field>
+                <label hlmFieldLabel>Category Description</label>
+                <input hlmInput [formField]="form.description" placeholder="Ex. categories related to grocery shopping">
+            </hlm-field>
+
+            <button hlmBtn [disabled]="form().invalid()" type="submit">
+                @if (form().submitting()) {
+                    <hlm-spinner></hlm-spinner>
+                }
+                Create Category
+            </button>
+        </hlm-field-group>
+    </form>
+</div>

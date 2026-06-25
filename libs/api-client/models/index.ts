@@ -15,6 +15,7 @@ export interface ApiError {
 }
 
 export interface AppUser {
+    uid: string;
     familyName: string;
     givenName: string;
 }
@@ -30,12 +31,14 @@ export interface ExpenseWindowMetadata {
     paidDate?: string;
 }
 
-export interface ExpenseCategory {
+export interface ExpenseCategoryMetadata {
     guid: string;
     name: string;
     description: string;
     color: string;
 }
+
+export type ExpenseCategory = ExpenseCategoryMetadata;
 
 export interface DollarAmount {
     dollars: number;
@@ -55,10 +58,11 @@ export interface FixedExpenseMetadata {
     amount: DollarAmount;
 }
 
-export type VariableExpense = VariableExpenseMetadata & { paidBy: AppUser; category?: ExpenseCategory };
-export type FixedExpense = FixedExpenseMetadata & { paidBy: AppUser; category: ExpenseCategory };
-export type ExpenseWindow = ExpenseWindowMetadata & { variableExpenses: Array<VariableExpense>; fixedExpenses: Array<FixedExpense> };
-export type Household = HouseholdMetadata & { currentWindow: ExpenseWindow };
+export type VariableExpense = VariableExpenseMetadata & { paidBy: AppUser; category?: ExpenseCategoryMetadata };
+export type FixedExpense = FixedExpenseMetadata & { defaultPaidBy: AppUser; category: ExpenseCategoryMetadata };
+export type FixedExpenseInstance = FixedExpenseMetadata & { paidBy: AppUser; category: ExpenseCategoryMetadata };
+export type ExpenseWindow = ExpenseWindowMetadata & { variableExpenses: Array<VariableExpense>; fixedExpenses: Array<FixedExpenseInstance> };
+export type Household = HouseholdMetadata & { currentWindow: ExpenseWindow; recentWindows: Array<ExpenseWindowMetadata> };
 export type GetHouseholdsForCurrentUserResponse = Array<HouseholdMetadata>;
 
 export interface HouseholdCreateRequest {
@@ -71,6 +75,19 @@ export interface VariableExpenseCreateRequest {
     amount: DollarAmount;
     paidOn: string;
     categoryGuid: string;
+}
+
+export interface FixedExpenseCreateRequest {
+    description: string;
+    amount: DollarAmount;
+    categoryGuid: string;
+    defaultPaidByUID: string;
+}
+
+export interface ExpenseCategoryCreateRequest {
+    name: string;
+    description: string;
+    color: string;
 }
 
 /** Request Options for Angular HttpClient requests */

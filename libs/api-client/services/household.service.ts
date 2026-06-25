@@ -12,7 +12,7 @@ import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { BASE_PATH_DEFAULT, CLIENT_CONTEXT_TOKEN_DEFAULT } from "../tokens";
 import { HttpParamsBuilder } from "../utils/http-params-builder";
-import { RequestOptions, GetHouseholdsForCurrentUserResponse, HouseholdCreateRequest, HouseholdMetadata, Household } from "../models";
+import { RequestOptions, GetHouseholdsForCurrentUserResponse, HouseholdCreateRequest, HouseholdMetadata, Household, AppUser } from "../models";
 
 @Injectable({ providedIn: "root" })
 export class HouseholdService {
@@ -83,6 +83,30 @@ export class HouseholdService {
     getHouseholdByGUID(householdGuid: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<Household>>;
     getHouseholdByGUID(householdGuid: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/v1/household/${householdGuid}`;
+
+        let headers: HttpHeaders;
+        if (options?.headers instanceof HttpHeaders) {
+            headers = options.headers;
+        } else {
+            headers = new HttpHeaders(options?.headers);
+        }
+
+        const requestOptions: any = {
+            observe: observe as any,
+            headers,
+            reportProgress: options?.reportProgress,
+            withCredentials: options?.withCredentials,
+            context: this.createContextWithClientId(options?.context)
+        };
+
+        return this.httpClient.get(url, requestOptions);
+    }
+
+    getHouseholdMembers(householdGuid: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<Array<AppUser>>;
+    getHouseholdMembers(householdGuid: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<Array<AppUser>>>;
+    getHouseholdMembers(householdGuid: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<Array<AppUser>>>;
+    getHouseholdMembers(householdGuid: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+        const url = `${this.basePath}/api/v1/household/${householdGuid}/members`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {

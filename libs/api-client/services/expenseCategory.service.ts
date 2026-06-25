@@ -12,7 +12,7 @@ import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { BASE_PATH_DEFAULT, CLIENT_CONTEXT_TOKEN_DEFAULT } from "../tokens";
 import { HttpParamsBuilder } from "../utils/http-params-builder";
-import { RequestOptions, ExpenseCategory } from "../models";
+import { RequestOptions, ExpenseCategoryMetadata, ExpenseCategoryCreateRequest, ExpenseCategory } from "../models";
 
 @Injectable({ providedIn: "root" })
 export class ExpenseCategoryService {
@@ -25,11 +25,63 @@ export class ExpenseCategoryService {
         return context.set(this.clientContextToken, 'default');
     }
 
-    getExpenseCategoriesForHousehold(householdGuid: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<Array<ExpenseCategory>>;
-    getExpenseCategoriesForHousehold(householdGuid: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<Array<ExpenseCategory>>>;
-    getExpenseCategoriesForHousehold(householdGuid: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<Array<ExpenseCategory>>>;
+    getExpenseCategoriesForHousehold(householdGuid: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<Array<ExpenseCategoryMetadata>>;
+    getExpenseCategoriesForHousehold(householdGuid: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<Array<ExpenseCategoryMetadata>>>;
+    getExpenseCategoriesForHousehold(householdGuid: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<Array<ExpenseCategoryMetadata>>>;
     getExpenseCategoriesForHousehold(householdGuid: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/v1/household/${householdGuid}/expense-category`;
+
+        let headers: HttpHeaders;
+        if (options?.headers instanceof HttpHeaders) {
+            headers = options.headers;
+        } else {
+            headers = new HttpHeaders(options?.headers);
+        }
+
+        const requestOptions: any = {
+            observe: observe as any,
+            headers,
+            reportProgress: options?.reportProgress,
+            withCredentials: options?.withCredentials,
+            context: this.createContextWithClientId(options?.context)
+        };
+
+        return this.httpClient.get(url, requestOptions);
+    }
+
+    createExpenseCategoryForHousehold(householdGuid: string, expenseCategoryCreateRequest?: ExpenseCategoryCreateRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<ExpenseCategoryMetadata>;
+    createExpenseCategoryForHousehold(householdGuid: string, expenseCategoryCreateRequest?: ExpenseCategoryCreateRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<ExpenseCategoryMetadata>>;
+    createExpenseCategoryForHousehold(householdGuid: string, expenseCategoryCreateRequest?: ExpenseCategoryCreateRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<ExpenseCategoryMetadata>>;
+    createExpenseCategoryForHousehold(householdGuid: string, expenseCategoryCreateRequest?: ExpenseCategoryCreateRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+        const url = `${this.basePath}/api/v1/household/${householdGuid}/expense-category`;
+
+        let headers: HttpHeaders;
+        if (options?.headers instanceof HttpHeaders) {
+            headers = options.headers;
+        } else {
+            headers = new HttpHeaders(options?.headers);
+        }
+        // Set Content-Type for JSON requests if not already set
+        if (!headers.has('Content-Type')) {
+            headers = headers.set('Content-Type', 'application/json');
+        }
+
+        const requestOptions: any = {
+            observe: observe as any,
+            headers,
+            reportProgress: options?.reportProgress,
+            withCredentials: options?.withCredentials,
+            context: this.createContextWithClientId(options?.context)
+        };
+
+        return this.httpClient.post(url, expenseCategoryCreateRequest, requestOptions);
+    }
+
+    getExpenseCategoryById(expenseCategoryGuid: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<ExpenseCategory>;
+    getExpenseCategoryById(expenseCategoryGuid: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<ExpenseCategory>>;
+    getExpenseCategoryById(expenseCategoryGuid: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<ExpenseCategory>>;
+    getExpenseCategoryById(expenseCategoryGuid: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+        const url = `${this.basePath}/api/v1/expense-category/${expenseCategoryGuid}`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {

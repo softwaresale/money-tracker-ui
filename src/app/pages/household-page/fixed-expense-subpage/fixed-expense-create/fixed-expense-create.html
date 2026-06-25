@@ -1,0 +1,55 @@
+
+<div appSubpageContainer>
+    <h3 hlmH3>Create Fixed Expense</h3>
+    <form [formRoot]="form">
+        <hlm-field-group>
+            <hlm-field>
+                <label hlmFieldLabel>Description</label>
+                <input
+                    [formField]="form.description"
+                    placeholder="Ex. rent"
+                    hlmInput>
+            </hlm-field>
+            <hlm-field>
+                <label hlmFieldLabel>Amount</label>
+                <hlm-input-group>
+                    <hlm-input-group-addon>
+                        <hlm-input-group-text>$</hlm-input-group-text>
+                    </hlm-input-group-addon>
+                    <input
+                        hlmInputGroupInput
+                        [formField]="form.amount"
+                        type="number">
+                </hlm-input-group>
+            </hlm-field>
+            <hlm-field>
+                <label hlmFieldLabel>Category</label>
+                <hlm-native-select [formField]="form.categoryGuid">
+                    <option hlmNativeSelectOption value="">Select a category</option>
+                    @for (category of expenseCategories.value(); track category.guid) {
+                        <option hlmNativeSelectOption [value]="category.guid">{{ category.name }}</option>
+                    }
+                </hlm-native-select>
+            </hlm-field>
+            <hlm-field>
+                <label hlmFieldLabel>Default Paid By</label>
+                <hlm-native-select [formField]="form.defaultPaidByUID">
+                    <option hlmNativeSelectOption value="">Select a member</option>
+                    @for (member of householdMembers.value(); track member.uid) {
+                        <option hlmNativeSelectOption [value]="member.uid">{{ member.givenName }} {{ member.familyName }}</option>
+                    }
+                </hlm-native-select>
+            </hlm-field>
+
+            <button hlmBtn type="submit" [disabled]="form().invalid()">
+                @if (form().submitting()) {
+                    <hlm-spinner></hlm-spinner>
+                }
+                @else {
+                    <ng-icon hlmIcon name="add"></ng-icon>
+                }
+                Save Fixed Expense
+            </button>
+        </hlm-field-group>
+    </form>
+</div>

@@ -1,0 +1,40 @@
+
+<div appSubpageContainer>
+    <span hlmLead>Expense Categories</span>
+
+    <div class="flex flex-col sm:flex-row gap-2">
+        <a hlmBtn class="flex-1" routerLink="create">
+            <ng-icon hlmIcon name="add"></ng-icon>
+            Add Category
+        </a>
+    </div>
+
+    @for (category of categories(); track category.guid) {
+        <a hlmItem variant="outline" [routerLink]="[category.guid]">
+            <hlm-item-content>
+                <span hlmItemTitle>{{ category.name }}</span>
+                <span hlmItemDescription>{{ category.description }}</span>
+            </hlm-item-content>
+            <hlm-item-actions>
+                <ng-icon hlmIcon name="goto"></ng-icon>
+            </hlm-item-actions>
+        </a>
+    }
+    @empty {
+        <hlm-empty>
+            <hlm-empty-media variant="icon">
+                <ng-icon hlmIcon name="category"></ng-icon>
+            </hlm-empty-media>
+            <hlm-empty-header>
+                <span hlmEmptyTitle>No Categories</span>
+                <span hlmEmptyDescription>No Categories exist for this household yet. Create one to categorize your expenses</span>
+            </hlm-empty-header>
+            <hlm-empty-content>
+                <a hlmBtn routerLink="create">
+                    <ng-icon hlmIcon name="add"></ng-icon>
+                    Create Category
+                </a>
+            </hlm-empty-content>
+        </hlm-empty>
+    }
+</div>

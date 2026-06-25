@@ -1,0 +1,45 @@
+
+<div appSubpageContainer>
+    <span hlmLead>Fixed Expenses</span>
+    
+    <div appActionBox>
+        <a hlmBtn routerLink="create">
+            <ng-icon hlmIcon name="add"></ng-icon>
+            Add Fixed Expense
+        </a>
+    </div>
+
+    @for (fixedExpense of fixedExpenses(); track fixedExpense.guid) {
+        <a hlmItem variant="outline" [routerLink]="[fixedExpense.guid]">
+            <hlm-item-content>
+                <span hlmItemTitle>{{ fixedExpense.description }}</span>
+                <span hlmItemDescription>
+                    <app-category-chip [category]="fixedExpense.category"></app-category-chip>
+                </span>
+            </hlm-item-content>
+            <hlm-item-content>
+                <span hlmItemDescription>{{ fixedExpense.amount | dollarAmount}}</span>
+            </hlm-item-content>
+            <hlm-item-actions>
+                <ng-icon hlmIcon name="goto"></ng-icon>
+            </hlm-item-actions>
+        </a>
+    }
+    @empty {
+        <hlm-empty>
+            <hlm-empty-media variant="icon">
+                <ng-icon hlmIcon name="fixedExpense"></ng-icon>
+            </hlm-empty-media>
+            <hlm-empty-header>
+                <span hlmEmptyTitle>No Fixed Expenses</span>
+                <span hlmEmptyDescription>No Fixed Expenses exist for this household yet. Create one to track your fixed, recurring expenses</span>
+            </hlm-empty-header>
+            <hlm-empty-content>
+                <a hlmBtn routerLink="create">
+                    <ng-icon hlmIcon name="add"></ng-icon>
+                    Create Fixed Expense
+                </a>
+            </hlm-empty-content>
+        </hlm-empty>
+    }
+</div>

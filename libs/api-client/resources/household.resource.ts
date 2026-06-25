@@ -12,7 +12,7 @@ import { HttpContext, HttpContextToken, HttpHeaders, HttpParams, httpResource, H
 import { inject, Injectable, Signal } from "@angular/core";
 import { BASE_PATH_DEFAULT, CLIENT_CONTEXT_TOKEN_DEFAULT } from "../tokens";
 import { HttpParamsBuilder } from "../utils/http-params-builder";
-import { GetHouseholdsForCurrentUserResponse, Household } from "../models";
+import { GetHouseholdsForCurrentUserResponse, Household, AppUser } from "../models";
 
 @Injectable({ providedIn: "root" })
 export class HouseholdResource {
@@ -58,6 +58,27 @@ export class HouseholdResource {
         return httpResource(() => {
             return {
                 url: `${this.basePath}/api/v1/household/${typeof householdGuid === 'function' ? householdGuid() : householdGuid}`,
+                method: "GET",
+                headers,
+                context: this.createContextWithClientId(requestOptions?.context),
+                ...requestOptions
+            }
+        }, resourceOptions);
+    }
+
+    getHouseholdMembers(householdGuid: Signal<string> | string, resourceOptions: HttpResourceOptions<Array<AppUser>, unknown> & { defaultValue: NoInfer<Array<AppUser>> }, requestOptions?: Omit<HttpResourceRequest, "method" | "url" | "params">): HttpResourceRef<Array<AppUser>>;
+    getHouseholdMembers(householdGuid: Signal<string> | string, resourceOptions?: HttpResourceOptions<Array<AppUser>, unknown>, requestOptions?: Omit<HttpResourceRequest, "method" | "url" | "params">): HttpResourceRef<Array<AppUser> | undefined>;
+    getHouseholdMembers(householdGuid: Signal<string> | string, resourceOptions?: HttpResourceOptions<Array<AppUser>, unknown>, requestOptions?: Omit<HttpResourceRequest, "method" | "url" | "params">): HttpResourceRef<Array<AppUser> | undefined> {
+
+        let headers: HttpHeaders;
+        if (requestOptions?.headers instanceof HttpHeaders) {
+            headers = requestOptions.headers;
+        } else {
+            headers = new HttpHeaders(requestOptions?.headers as Record<string, string>);
+        }
+        return httpResource(() => {
+            return {
+                url: `${this.basePath}/api/v1/household/${typeof householdGuid === 'function' ? householdGuid() : householdGuid}/members`,
                 method: "GET",
                 headers,
                 context: this.createContextWithClientId(requestOptions?.context),
