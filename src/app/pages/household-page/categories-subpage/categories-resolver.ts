@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
-import { ExpenseCategory, ExpenseCategoryService } from '@api-client';
+import { ExpenseCategoryMetadata, ExpenseCategoryService } from '@api-client';
 
-export const categoriesResolver: ResolveFn<ExpenseCategory[]> = (route, state) => {
+export const categoriesResolver: ResolveFn<ExpenseCategoryMetadata[]> = (route, state) => {
   const householdGuid = route.paramMap.get('householdId');
   if (!householdGuid) {
     throw new Error('householdId not in route');

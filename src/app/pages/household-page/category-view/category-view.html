@@ -1,5 +1,18 @@
 
 <div class="flex flex-col gap-4 mt-2">
-    <span hlmH3>{{ category().name }}</span>
-    <span>{{ category().description }}</span>
+    <div>
+        <p hlmH3>{{ category().name }}</p>
+        <p>{{ category().description }}</p>
+    </div>
+
+    <div>
+        <span hlmLead>Category Split</span>
+        <p>Determine what percentage each household member is responsible for paying.</p>
+    </div>
+
+    <div class="flex flex-col gap-4">
+
+        <app-percentages [percentages]="percentages()"></app-percentages>
+
+    </div>
 </div>

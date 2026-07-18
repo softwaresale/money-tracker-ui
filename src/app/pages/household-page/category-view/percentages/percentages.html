@@ -1,0 +1,11 @@
+<div class="flex flex-col gap-4">
+@for (percentage of percentages(); track percentage.user.uid) {
+    <div class="flex flex-col gap-2 p-2">
+        <span>{{ percentage.user.givenName }} {{ percentage.user.familyName }}</span>
+        <div class="inline-flex gap-4 items-center">
+            <hlm-slider [disabled]="disabled()" [value]="[percentage.percentage * 100]" (valueChange)="updateMemberPercentages($index, $event[0])" [min]="0" [max]="100" [step]="5" [showTicks]="true"></hlm-slider>
+            <span>{{ percentage.percentage * 100 }}%</span>
+        </div>
+    </div>
+}
+</div>

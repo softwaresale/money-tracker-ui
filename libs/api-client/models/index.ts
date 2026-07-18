@@ -38,7 +38,12 @@ export interface ExpenseCategoryMetadata {
     color: string;
 }
 
-export type ExpenseCategory = ExpenseCategoryMetadata;
+export interface ExpenseCategoryPercentage {
+    percentage: number;
+    user: AppUser;
+}
+
+export type ExpenseCategory = ExpenseCategoryMetadata & { percentages: Array<ExpenseCategoryPercentage> };
 
 export interface DollarAmount {
     dollars: number;

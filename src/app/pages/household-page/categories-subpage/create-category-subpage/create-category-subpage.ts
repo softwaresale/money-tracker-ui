@@ -1,7 +1,7 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { form, maxLength, required, FormRoot, FormField, TreeValidationResult } from '@angular/forms/signals';
 import { Router } from '@angular/router';
-import { ExpenseCategory, ExpenseCategoryCreateRequest, ExpenseCategoryService } from '@api-client';
+import { ExpenseCategoryCreateRequest, ExpenseCategoryMetadata, ExpenseCategoryService } from '@api-client';
 import { toast } from '@spartan-ng/brain/sonner';
 import { HlmButton } from "@spartan-ng/helm/button";
 import { HlmFieldGroup, HlmField, HlmFieldLabel } from "@spartan-ng/helm/field";
@@ -58,7 +58,7 @@ export class CreateCategorySubpage {
                 toast.error(`Failed to create category: ${err}`);
               }
             }),
-            map<ExpenseCategory, TreeValidationResult>(() => ({ kind: 'success' }))
+            map<ExpenseCategoryMetadata, TreeValidationResult>(() => ({ kind: 'success' }))
           );
 
           return firstValueFrom(request$);
