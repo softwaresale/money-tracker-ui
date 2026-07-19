@@ -28,7 +28,9 @@
         </hlm-tabs-list>
         
         <div hlmTabsContent="summary" class="flex flex-col gap-4">
-            <h1>Summary will go here</h1>
+            <ng-template hlmTabsContentLazy>
+                <app-summary-subpage [windowId]="windowId()"></app-summary-subpage>
+            </ng-template>
         </div>
 
         <div hlmTabsContent="variable" class="flex flex-col gap-4">

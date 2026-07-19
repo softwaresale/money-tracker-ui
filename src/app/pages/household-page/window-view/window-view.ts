@@ -10,10 +10,11 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCircleDollarSign, lucidePen, lucidePlusCircle } from '@ng-icons/lucide';
 import { HlmIcon } from "@spartan-ng/helm/icon";
 import { ActionBox, ActionBoxAction } from "../../../shared/action-box/action-box";
+import { SummarySubpage } from "./summary-subpage/summary-subpage";
 
 @Component({
   selector: 'app-window-view',
-  imports: [HlmButton, HlmTypographyImports, ExpenseList, DatePipe, HlmTabsImports, RouterLink, HlmIcon, NgIcon, ActionBox, ActionBoxAction],
+  imports: [HlmButton, HlmTypographyImports, ExpenseList, DatePipe, HlmTabsImports, RouterLink, HlmIcon, NgIcon, ActionBox, ActionBoxAction, SummarySubpage],
   templateUrl: './window-view.html',
   styleUrl: './window-view.css',
   providers: [

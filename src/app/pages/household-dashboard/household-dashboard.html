@@ -1,0 +1,19 @@
+
+<div appCenteredContentContainer>
+    <div appCenteredContent appBasePage>
+        <h2 hlmH2>Your Households</h2>
+
+        <div class="flex flex-col gap-4">
+            @for (household of userHouseholds(); track household.guid) {
+                <a hlmItem [routerLink]="['/households', household.guid]" variant="outline">
+                    <hlm-item-content>
+                        <hlm-item-title>{{ household.name }}</hlm-item-title>
+                    </hlm-item-content>
+                    <hlm-item-actions>
+                        <ng-icon hlmIcon name="chevronRight"></ng-icon>
+                    </hlm-item-actions>
+                </a>
+            }
+        </div>
+    </div>
+</div>

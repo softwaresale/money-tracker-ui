@@ -13,6 +13,8 @@ import { categoryResolver } from './pages/household-page/category-view/category-
 import { FixedExpenseSubpage } from './pages/household-page/fixed-expense-subpage/fixed-expense-subpage';
 import { FixedExpenseCreate } from './pages/household-page/fixed-expense-subpage/fixed-expense-create/fixed-expense-create';
 import { fixedExpensesResolver } from './pages/household-page/fixed-expense-subpage/fixed-expenses-resolver';
+import { HouseholdDashboard } from './pages/household-dashboard/household-dashboard';
+import { userHouseholdsResolver } from './pages/household-dashboard/user-households-resolver';
 
 export const routes: Routes = [
     {
@@ -20,6 +22,14 @@ export const routes: Routes = [
         canActivate: [authGuard],
         canActivateChild: [authGuard],
         children: [
+            {
+                path: '',
+                pathMatch: 'full',
+                component: HouseholdDashboard,
+                resolve: {
+                    userHouseholds: userHouseholdsResolver,
+                }
+            },
             {
                 path: ':householdId',
                 component: HouseholdPage,
@@ -87,5 +97,10 @@ export const routes: Routes = [
                 ]
             }
         ]
+    },
+    {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'households'
     }
 ];

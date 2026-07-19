@@ -68,6 +68,29 @@ export type FixedExpense = FixedExpenseMetadata & { defaultPaidBy: AppUser; cate
 export type FixedExpenseInstance = FixedExpenseMetadata & { paidBy: AppUser; category: ExpenseCategoryMetadata };
 export type ExpenseWindow = ExpenseWindowMetadata & { variableExpenses: Array<VariableExpense>; fixedExpenses: Array<FixedExpenseInstance> };
 export type Household = HouseholdMetadata & { currentWindow: ExpenseWindow; recentWindows: Array<ExpenseWindowMetadata> };
+
+export interface WindowSummaryCategoryTotal {
+    category: ExpenseCategoryMetadata;
+    total: DollarAmount;
+}
+
+export interface WindowSummaryUserSpending {
+    user: AppUser;
+    total: DollarAmount;
+}
+
+export interface WindowSummaryUserCategoryTotals {
+    user: AppUser;
+    categories: Array<WindowSummaryCategoryTotal>;
+}
+
+export interface WindowSummary {
+    total: DollarAmount;
+    byUser: Array<WindowSummaryUserSpending>;
+    byCategory: Array<WindowSummaryCategoryTotal>;
+    userCategory: Array<WindowSummaryUserCategoryTotals>;
+}
+
 export type GetHouseholdsForCurrentUserResponse = Array<HouseholdMetadata>;
 
 export interface HouseholdCreateRequest {

@@ -12,3 +12,4 @@ export { FixedExpenseService } from "./fixedExpense.service";
 export { HouseholdService } from "./household.service";
 export { VariableExpenseService } from "./variableExpense.service";
 export { WindowService } from "./window.service";
+export { WindowSummaryService } from "./windowSummary.service";

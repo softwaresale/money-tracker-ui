@@ -1,0 +1,40 @@
+
+<div class="flex flex-col gap-4">
+
+    <app-summary-card title="Total Spending" description="Total dollars spent this window by all parties">
+        <app-large-figure [amount]="summary().total"></app-large-figure>
+    </app-summary-card>
+ 
+    <app-summary-card title="Spending By Category" description="Total spending by each category for all parties">
+        <app-category-total-table [categoryTotals]="summary().byCategory"></app-category-total-table>
+    </app-summary-card>
+
+    <app-summary-card title="Spending By User" description="Total spending by each user for all categories">
+
+        <table class="w-full">
+            <thead>
+                <th>User</th>
+                <th>Amount</th>
+            </thead>
+            <tbody>
+                @for (entry of summary().byUser; track entry.user.uid) {
+                    <tr>
+                        <td>{{ entry.user.givenName }} {{ entry.user.familyName }}</td>
+                        <td class="text-right">{{ entry.total | dollarAmount }}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </app-summary-card>
+
+    <app-summary-card title="User Spending By Category" description="Total spending by user broken down by category">
+        <div class="flex flex-col gap-2">
+            @for (userEntry of summary().userCategory; track userEntry.user.uid) {
+                <div class="flex flex-col gap-1">
+                    <h4 hlmH4>{{ userEntry.user.givenName }} {{ userEntry.user.familyName }}</h4>
+                    <app-category-total-table [categoryTotals]="userEntry.categories"></app-category-total-table>
+                </div>
+            }
+        </div>
+    </app-summary-card>
+</div>

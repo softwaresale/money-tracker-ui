@@ -1,0 +1,16 @@
+<table class="w-full">
+    <thead>
+        <th>Category</th>
+        <th>Amount</th>
+    </thead>
+    <tbody>
+        @for (entry of categoryTotals(); track entry.category.guid) {
+            <tr>
+                <td>
+                    <app-category-chip [category]="entry.category"></app-category-chip>
+                </td>
+                <td class="text-right">{{ entry.total | dollarAmount }}</td>
+            </tr>
+        }
+    </tbody>
+</table>

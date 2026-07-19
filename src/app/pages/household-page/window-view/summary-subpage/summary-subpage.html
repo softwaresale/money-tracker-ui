@@ -1,0 +1,17 @@
+
+@if (summary.hasValue()) {
+    <app-window-summary-view [summary]="summary.value()"></app-window-summary-view>
+}
+@else if (summary.isLoading()) {
+    <div>
+        <hlm-spinner></hlm-spinner>
+    </div>
+}
+@else if (summary.error(); as summaryError) {
+    <div>
+        <p>{{ summaryError.message }}</p>
+    </div>
+}
+@else {
+    <p>Other state encountered</p>
+}

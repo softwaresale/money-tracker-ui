@@ -7,7 +7,7 @@ import { DollarAmount } from '@api-client';
 export class DollarAmountPipe implements PipeTransform {
 
   transform(value: DollarAmount, ...args: unknown[]): unknown {
-    return `$${value.dollars}.${value.cents}`;
+    return `$${value.dollars}.${value.cents.toString().padStart(2, '0')}`;
   }
 
 }
