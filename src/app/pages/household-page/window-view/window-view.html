@@ -47,7 +47,7 @@
                     Add Expense
                 </a>
             </div>
-            <app-expense-list [expenses]="expenseWindow().variableExpenses" title="Variable Expenses"></app-expense-list>
+            <app-expense-list [expenses]="variableExpenses()" title="Variable Expenses" (expenseDeleteRequested)="deleteVariableExpense($event)"></app-expense-list>
         </div>
         
         <div hlmTabsContent="fixed" class="flex flex-col gap-4">
@@ -57,7 +57,7 @@
                     Manage Fixed Expenses
                 </a>
             </div>
-            <app-expense-list [expenses]="expenseWindow().fixedExpenses" title="Fixed Expenses"></app-expense-list>
+            <app-expense-list [expenses]="expenseWindow().fixedExpenses" [showActions]="false" title="Fixed Expenses"></app-expense-list>
         </div>
     </hlm-tabs>
 </div>

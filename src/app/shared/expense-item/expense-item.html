@@ -2,17 +2,29 @@
 <hlm-item variant="outline">
     <hlm-item-content>
         <hlm-item-title>{{ expense().description }}</hlm-item-title>
-        @if (expense().category; as categorySnapshot) {
-            <hlm-item-description>
-                <!--
-                <span hlmBadge>{{ description() }}</span>
-                -->
-                <app-category-chip [category]="categorySnapshot"></app-category-chip>
-            </hlm-item-description>
-        }
+        <hlm-item-description>{{ expense().paidBy.givenName }} {{ expense().paidBy.familyName }}</hlm-item-description>
     </hlm-item-content>
 
-    <hlm-item-content>
-        <p hlmItemDescription>{{ expense().amount | dollarAmount }}</p>
+    <hlm-item-content class="items-end">
+        <hlm-item-title>{{ expense().amount | dollarAmount }}</hlm-item-title>
+        @if (expense().category; as categorySnapshot) {
+            <app-category-chip [category]="categorySnapshot"></app-category-chip>   
+        }
     </hlm-item-content>
+    @if (showActions()) {
+        <hlm-item-actions>
+            <button hlmBtn variant="ghost" [hlmDropdownMenuTrigger]="menu">
+                <ng-icon hlmIcon name="menu"></ng-icon>
+            </button>
+        </hlm-item-actions>
+    }
 </hlm-item>
+
+<ng-template #menu>
+    <hlm-dropdown-menu>
+        <hlm-dropdown-menu-group>
+            <hlm-dropdown-menu-label>Item Actions</hlm-dropdown-menu-label>
+            <button hlmDropdownMenuItem variant="destructive" (click)="requestItemDeletion()">Delete Item</button>
+        </hlm-dropdown-menu-group>
+    </hlm-dropdown-menu>
+</ng-template>
