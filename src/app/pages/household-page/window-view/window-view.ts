@@ -7,7 +7,7 @@ import { DatePipe } from '@angular/common';
 import { HlmTabsImports } from '@spartan-ng/helm/tabs';
 import { RouterLink } from "@angular/router";
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideCircleDollarSign, lucidePen, lucidePlusCircle } from '@ng-icons/lucide';
+import { lucideCircleDollarSign, lucideEye, lucidePen, lucidePlusCircle } from '@ng-icons/lucide';
 import { HlmIcon } from "@spartan-ng/helm/icon";
 import { ActionBox, ActionBoxAction } from "../../../shared/action-box/action-box";
 import { SummarySubpage } from "./summary-subpage/summary-subpage";
@@ -22,6 +22,7 @@ import { SummarySubpage } from "./summary-subpage/summary-subpage";
       add: lucidePlusCircle,
       settle: lucideCircleDollarSign,
       edit: lucidePen,
+      view: lucideEye,
     })
   ]
 })
@@ -30,4 +31,6 @@ export class WindowView {
   readonly expenseWindow = input.required<ExpenseWindow>();
   
   protected readonly windowId = computed(() => this.expenseWindow().guid);
+
+  protected readonly paid = computed(() => !!(this.expenseWindow().paidDate));
 }

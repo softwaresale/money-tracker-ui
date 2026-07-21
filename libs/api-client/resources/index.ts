@@ -11,4 +11,5 @@ export { ExpenseCategoryResource } from "./expenseCategory.resource";
 export { FixedExpenseResource } from "./fixedExpense.resource";
 export { HouseholdResource } from "./household.resource";
 export { WindowResource } from "./window.resource";
+export { WindowSettlementResource } from "./windowSettlement.resource";
 export { WindowSummaryResource } from "./windowSummary.resource";

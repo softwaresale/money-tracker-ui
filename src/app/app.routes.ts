@@ -15,6 +15,8 @@ import { FixedExpenseCreate } from './pages/household-page/fixed-expense-subpage
 import { fixedExpensesResolver } from './pages/household-page/fixed-expense-subpage/fixed-expenses-resolver';
 import { HouseholdDashboard } from './pages/household-dashboard/household-dashboard';
 import { userHouseholdsResolver } from './pages/household-dashboard/user-households-resolver';
+import { SettleView } from './pages/household-page/window-view/settle-view/settle-view';
+import { settlementDataResolver } from './pages/household-page/window-view/settle-view/settlement-data-resolver';
 
 export const routes: Routes = [
     {
@@ -50,6 +52,13 @@ export const routes: Routes = [
                             {
                                 path: ':windowId/expense-form',
                                 component: VariableExpenseFormSubpage,
+                            },
+                            {
+                                path: ':windowId/settle',
+                                component: SettleView,
+                                resolve: {
+                                    settleData: settlementDataResolver,
+                                }
                             }
                         ]
                     },

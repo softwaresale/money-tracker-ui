@@ -91,6 +91,33 @@ export interface WindowSummary {
     userCategory: Array<WindowSummaryUserCategoryTotals>;
 }
 
+export interface UserContribution {
+    amount: DollarAmount;
+    contribType: 'under' | 'over';
+}
+
+export interface WindowSettleUserCategoryContribution {
+    user: AppUser;
+    category: ExpenseCategoryMetadata;
+    categoryTotal: DollarAmount;
+    userTotal: DollarAmount;
+    userPercent: number;
+    userResponsibility: DollarAmount;
+    userContribution: UserContribution;
+}
+
+export interface WindowSettlePayment {
+    payer: AppUser;
+    payee: AppUser;
+    amount: DollarAmount;
+}
+
+export interface WindowSettle {
+    window: ExpenseWindowMetadata;
+    payments: Array<WindowSettlePayment>;
+    breakdown: Array<WindowSettleUserCategoryContribution>;
+}
+
 export type GetHouseholdsForCurrentUserResponse = Array<HouseholdMetadata>;
 
 export interface HouseholdCreateRequest {

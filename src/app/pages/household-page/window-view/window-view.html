@@ -2,12 +2,19 @@
 <div class="flex flex-col gap-4">
     
     <div>
-        <span hlmH4>Expenses Since {{ expenseWindow().startDate | date }}</span>
+        <span hlmH4>
+        @if (paid()) {
+            Expenses from {{ expenseWindow().startDate | date }} to {{ expenseWindow().paidDate | date }}
+        }
+        @else {
+            Expenses Since {{ expenseWindow().startDate | date }}
+        }
+        </span>
     </div>
     
     <div appActionBox>
         <!-- Actions box -->
-         <a hlmBtn variant="default" size="lg">
+         <a hlmBtn variant="default" size="lg" routerLink="settle">
             @if (expenseWindow().paidDate === undefined) {
                 <ng-icon hlmIcon name="settle"></ng-icon>
                 Settle Up
@@ -35,7 +42,7 @@
 
         <div hlmTabsContent="variable" class="flex flex-col gap-4">
             <div appActionBox>
-                <a hlmBtn variant="secondary" routerLink="expense-form">
+                <a hlmBtn variant="secondary" routerLink="expense-form" [disabled]="paid()">
                     <ng-icon hlmIcon name="add"></ng-icon>
                     Add Expense
                 </a>

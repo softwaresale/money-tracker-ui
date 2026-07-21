@@ -1,0 +1,15 @@
+
+<hlm-card>
+    <div hlmCardContent>
+        <div class="grid grid-cols-3 gap-2 justify-center items-center">
+            <span hlmLarge class="text-center">{{ payersName() }}</span>
+            <div class="flex flex-col items-center">
+                <span>pays</span>
+                <ng-icon hlmIcon name="rightArrow"></ng-icon>
+            </div>
+            <span hlmLarge class="text-center">{{ payeesName() }}</span>
+
+            <span class="col-span-3 text-center" hlmH1>{{ amount() | dollarAmount }}</span>
+        </div>
+    </div>
+</hlm-card>

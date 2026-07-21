@@ -1,0 +1,29 @@
+
+<hlm-card>
+    <hlm-card-header>
+        <span hlmCardTitle>{{ userContribution().user.givenName }} {{ userContribution().user.familyName }}</span>
+        <span hlmCardDescription class="inline-flex items-center">
+            <app-category-chip [category]="category()"></app-category-chip>
+        </span>
+    </hlm-card-header>
+
+    <div hlmCardContent>
+        <table class="w-full">
+            <thead>
+                <th>Total ($)</th>
+                <th>Responsibility ($)</th>
+                <th>Contribution ($)</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ userContribution().userTotal | dollarAmount }}</td>
+                    <td>{{ userContribution().userResponsibility | dollarAmount }}</td>
+                    <td>
+                        {{ userContribution().userContribution.contribType }}
+                        {{ userContribution().userContribution.amount | dollarAmount}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</hlm-card>

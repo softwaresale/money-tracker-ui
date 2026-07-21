@@ -1,0 +1,32 @@
+
+<div class="flex flex-col gap-4">
+    <div class="flex p-2">
+        <span hlmH3>Expenses from {{ windowStartDate() | date }}</span>
+    </div>
+
+    <div class="flex flex-col">
+        <button hlmBtn size="lg" (click)="settleWindowAndCreateNew()" [disabled]="loading()">
+            @if (loading()) {
+                <hlm-spinner></hlm-spinner>
+            }
+            @else {
+                <ng-icon hlmIcon name="settleUp"></ng-icon>   
+            }
+            Close Window and Begin New
+        </button>
+    </div>
+
+    <div class="flex flex-col gap-2">
+        <span hlmLead>Payments</span>
+        @for (payment of payments(); track payment.payer.uid) {
+            <app-payment-card [payment]="payment"></app-payment-card>
+        }
+    </div>
+
+    <div class="flex flex-col gap-2">
+        <span hlmLead>User Contributions</span>
+        @for (contribution of contributions(); track $index) {
+            <app-user-contribution-card [userContribution]="contribution"></app-user-contribution-card>
+        }
+    </div>
+</div>
