@@ -1,7 +1,7 @@
-import { Component, computed, Directive, inject, input } from '@angular/core';
+import { Component, computed, Directive, inject, input, OnInit } from '@angular/core';
 import { CenteredContentContainer, CenteredContent } from "../../shared/centered-content/centered-content";
 import { BasePage } from "../../base-page/base-page";
-import { RouterOutlet, RouterLinkWithHref } from '@angular/router';
+import { RouterOutlet, RouterLinkWithHref, Router } from '@angular/router';
 import { Household } from '@api-client';
 import { HlmH2, HlmLead } from "@spartan-ng/helm/typography";
 import { HlmButton } from "@spartan-ng/helm/button";
@@ -33,12 +33,20 @@ export class NavGroupContainer {}
     })
   ]
 })
-export class HouseholdPage {
+export class HouseholdPage implements OnInit {
+
+  private readonly router = inject(Router);
+
   readonly householdId = input.required<string>();
   readonly household = input.required<Household>();
 
   protected readonly householdName = computed(() => this.household().name);
   protected readonly recentWindows = computed(() => this.household().recentWindows ?? []);
+  protected readonly currentWindowId = computed(() => this.household().currentWindow.guid);
 
   protected readonly householdViewRoute = computed(() => ([ '/households', this.householdId() ]));
+
+  ngOnInit(): void {
+    this.router.navigate([ ...this.householdViewRoute(), 'window', this.currentWindowId()]);
+  }
 }
