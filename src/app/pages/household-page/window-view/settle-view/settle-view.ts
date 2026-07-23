@@ -35,6 +35,8 @@ export class SettleView {
   protected readonly loading = signal(false);
 
   protected readonly windowStartDate = computed(() => this.settleData().window.startDate);
+  protected readonly windowPaid = computed(() => !!this.settleData().window.paidDate);
+  protected readonly showSettleAction = computed(() => !this.windowPaid());
 
   protected readonly payments = computed(() => this.settleData().payments);
   protected readonly contributions = computed(() => this.settleData().breakdown);

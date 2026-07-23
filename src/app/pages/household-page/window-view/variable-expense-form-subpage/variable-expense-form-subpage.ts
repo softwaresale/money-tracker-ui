@@ -84,7 +84,7 @@ export class VariableExpenseFormSubpage {
             tap({
               next: (value) => {
                 toast.success('Successully created expense');
-                this.router.navigate(['/', 'households', this.householdId(), 'window', this.windowId()]);
+                this.router.navigate(['/', 'households', this.householdId(), 'window', this.windowId()], { queryParams: { reload: true } });
               },
               error: err => {
                 console.error(`failed to create expense: ${err}`);

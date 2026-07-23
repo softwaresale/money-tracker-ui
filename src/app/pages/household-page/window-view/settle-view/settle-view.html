@@ -5,15 +5,17 @@
     </div>
 
     <div class="flex flex-col">
-        <button hlmBtn size="lg" (click)="settleWindowAndCreateNew()" [disabled]="loading()">
-            @if (loading()) {
-                <hlm-spinner></hlm-spinner>
-            }
-            @else {
-                <ng-icon hlmIcon name="settleUp"></ng-icon>   
-            }
-            Close Window and Begin New
-        </button>
+        @if (showSettleAction()) {
+            <button hlmBtn size="lg" (click)="settleWindowAndCreateNew()" [disabled]="loading()">
+                @if (loading()) {
+                    <hlm-spinner></hlm-spinner>
+                }
+                @else {
+                    <ng-icon hlmIcon name="settleUp"></ng-icon>   
+                }
+                Close Window and Begin New
+            </button>
+        }
     </div>
 
     <div class="flex flex-col gap-2">

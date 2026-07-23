@@ -47,7 +47,8 @@ export const routes: Routes = [
                                 component: WindowView,
                                 resolve: {
                                     expenseWindow: windowResolver,
-                                }
+                                },
+                                runGuardsAndResolvers: 'pathParamsOrQueryParamsChange'
                             },
                             {
                                 path: ':windowId/expense-form',
