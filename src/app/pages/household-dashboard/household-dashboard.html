@@ -5,7 +5,7 @@
 
         <div class="flex flex-col gap-4">
             @for (household of userHouseholds(); track household.guid) {
-                <a hlmItem [routerLink]="['/households', household.guid]" variant="outline">
+                <a hlmItem [routerLink]="['/households', household.guid]" variant="outline" (click)="storeRecentlyVisitedHousehold(household.guid)">
                     <hlm-item-content>
                         <hlm-item-title>{{ household.name }}</hlm-item-title>
                     </hlm-item-content>

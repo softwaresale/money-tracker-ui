@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { HouseholdMetadata } from '@api-client';
 import { BasePage } from "../../base-page/base-page";
 import { CenteredContentContainer, CenteredContent } from "../../shared/centered-content/centered-content";
@@ -8,6 +8,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronRightCircle } from '@ng-icons/lucide';
 import { HlmIcon } from "@spartan-ng/helm/icon";
 import { HlmH2 } from "@spartan-ng/helm/typography";
+import { PreferencesService } from '../../prefs/preferences';
 
 @Component({
   selector: 'app-household-dashboard',
@@ -22,5 +23,11 @@ import { HlmH2 } from "@spartan-ng/helm/typography";
 })
 export class HouseholdDashboard {
 
+  private readonly preferencesService = inject(PreferencesService);
+
   readonly userHouseholds = input.required<HouseholdMetadata[]>();
+
+  storeRecentlyVisitedHousehold(id: string) {
+    this.preferencesService.storeItem('moneytracker:preferences:defaultHousehold', id);
+  }
 }
