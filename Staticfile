@@ -1,4 +1,4 @@
 
-root: /app/app/money-tracker/browser
+root: /app/dist/money-tracker/browser
 
 index_fallback: true
