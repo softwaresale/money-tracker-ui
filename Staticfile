@@ -1,0 +1,4 @@
+
+root: /app/app/money-tracker/browser
+
+index_fallback: true
