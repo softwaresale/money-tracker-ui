@@ -10,7 +10,7 @@ import { provideDefaultClient } from '@api-client';
 const oidcConfig: UserManagerSettings = {
   authority: 'https://salefamily-hdmlgu.us1.zitadel.cloud/',
   client_id: '374377270212596762',
-  redirect_uri: "${window.location.origin}/signin/callback",
+  redirect_uri: `${window.location.origin}/signin/callback`,
   response_type: "code",
   scope: "openid profile email",
   post_logout_redirect_uri: window.location.origin,
