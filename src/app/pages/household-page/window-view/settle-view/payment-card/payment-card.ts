@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
 import { WindowSettlePayment } from '@api-client';
 import { HlmCard, HlmCardContent } from "@spartan-ng/helm/card";
 import { HlmLarge, HlmH1 } from "@spartan-ng/helm/typography";
@@ -12,6 +12,7 @@ import { DollarAmountPipe } from "../../../../../shared/dollar-amount-pipe";
   imports: [HlmCard, HlmCardContent, HlmLarge, HlmIcon, NgIcon, DollarAmountPipe, HlmH1],
   templateUrl: './payment-card.html',
   styleUrl: './payment-card.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     provideIcons({
       rightArrow: lucideArrowRight,

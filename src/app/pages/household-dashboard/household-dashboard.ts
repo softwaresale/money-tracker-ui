@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { HouseholdMetadata } from '@api-client';
 import { BasePage } from "../../base-page/base-page";
 import { CenteredContentContainer, CenteredContent } from "../../shared/centered-content/centered-content";
@@ -15,6 +15,7 @@ import { PreferencesService } from '../../prefs/preferences';
   imports: [BasePage, CenteredContentContainer, CenteredContent, HlmItemImports, RouterLink, HlmIcon, NgIcon, HlmH2],
   templateUrl: './household-dashboard.html',
   styleUrl: './household-dashboard.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     provideIcons({
       chevronRight: lucideChevronRightCircle

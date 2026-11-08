@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, linkedSignal } from '@angular/core';
+import { Component, computed, inject, input, linkedSignal, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '@edgeflare/ngx-oidc';
 import { VariableExpenseCreateRequest, ExpenseCategoryResource, VariableExpenseService, VariableExpense } from '@api-client';
 import { Router } from '@angular/router';
@@ -28,6 +28,7 @@ import { HlmSpinner } from "@spartan-ng/helm/spinner";
     HlmDatePickerImports,    
   ],
   templateUrl: './variable-expense-form-subpage.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './variable-expense-form-subpage.css',
 })
 export class VariableExpenseFormSubpage {

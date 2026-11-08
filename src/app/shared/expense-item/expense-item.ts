@@ -1,4 +1,4 @@
-import { Component, computed, input, output } from '@angular/core';
+import { Component, computed, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { FixedExpenseInstance, VariableExpense } from '@api-client';
 import { HlmItemImports } from '@spartan-ng/helm/item';
 import { DollarAmountPipe } from '../dollar-amount-pipe';
@@ -15,6 +15,7 @@ import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
   imports: [HlmItemImports, DollarAmountPipe, HlmBadgeImports, CategoryChip, HlmIcon, NgIcon, HlmButton, HlmDropdownMenuImports],
   templateUrl: './expense-item.html',
   styleUrl: './expense-item.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     provideIcons({
       menu: lucideMoreVertical,

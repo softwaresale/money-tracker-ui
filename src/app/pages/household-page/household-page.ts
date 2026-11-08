@@ -1,4 +1,4 @@
-import { Component, computed, Directive, inject, input, OnInit } from '@angular/core';
+import { Component, computed, Directive, inject, input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CenteredContentContainer, CenteredContent } from "../../shared/centered-content/centered-content";
 import { BasePage } from "../../base-page/base-page";
 import { RouterOutlet, RouterLinkWithHref, Router } from '@angular/router';
@@ -25,6 +25,7 @@ export class NavGroupContainer {}
   imports: [CenteredContentContainer, CenteredContent, BasePage, RouterOutlet, HlmH2, HlmButton, HlmIcon, NgIcon, HlmSheetImports, HlmItemImports, RouterLinkWithHref, HlmLead, NavGroupContainer, DatePipe],
   templateUrl: './household-page.html',
   styleUrl: './household-page.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     provideIcons({
       settings: lucideSettings,

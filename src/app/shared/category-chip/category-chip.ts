@@ -1,10 +1,11 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
 import { ExpenseCategoryMetadata } from '@api-client';
 
 @Component({
   selector: 'app-category-chip',
   imports: [],
   templateUrl: './category-chip.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './category-chip.css',
 })
 export class CategoryChip {

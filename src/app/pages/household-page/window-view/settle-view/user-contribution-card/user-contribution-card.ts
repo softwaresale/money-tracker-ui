@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
 import { ExpenseCategoryMetadata, WindowSettleUserCategoryContribution } from '@api-client';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { CategoryChip } from "../../../../../shared/category-chip/category-chip";
@@ -8,6 +8,7 @@ import { DollarAmountPipe } from "../../../../../shared/dollar-amount-pipe";
   selector: 'app-user-contribution-card',
   imports: [HlmCardImports, CategoryChip, DollarAmountPipe],
   templateUrl: './user-contribution-card.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './user-contribution-card.css',
 })
 export class UserContributionCard {

@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { form, maxLength, min, required, FormRoot, FormField, TreeValidationResult } from '@angular/forms/signals';
 import { SubpageContainer } from "../../../../shared/subpage/subpage-container";
 import { HlmFieldImports } from '@spartan-ng/helm/field';
@@ -36,6 +36,7 @@ import { Router } from '@angular/router';
   ],
   templateUrl: './fixed-expense-create.html',
   styleUrl: './fixed-expense-create.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     provideIcons({
       add: lucidePlusCircle,

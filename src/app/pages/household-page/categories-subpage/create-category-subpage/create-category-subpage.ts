@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { form, maxLength, required, FormRoot, FormField, TreeValidationResult } from '@angular/forms/signals';
 import { Router } from '@angular/router';
 import { ExpenseCategoryCreateRequest, ExpenseCategoryMetadata, ExpenseCategoryService } from '@api-client';
@@ -13,6 +13,7 @@ import { firstValueFrom, map, tap } from 'rxjs';
   selector: 'app-create-category-subpage',
   imports: [HlmButton, FormRoot, HlmFieldGroup, HlmField, HlmFieldLabel, HlmInput, FormField, HlmSpinner],
   templateUrl: './create-category-subpage.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './create-category-subpage.css',
 })
 export class CreateCategorySubpage {

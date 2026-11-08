@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { ExpenseCategory } from '@api-client';
 import { HlmLead } from "@spartan-ng/helm/typography";
 import { HlmEmptyImports } from '@spartan-ng/helm/empty';
@@ -15,6 +15,7 @@ import { SubpageContainer } from "../../../shared/subpage/subpage-container";
   imports: [HlmLead, HlmEmptyImports, HlmIcon, NgIcon, HlmButton, HlmItemImports, RouterLink, SubpageContainer],
   templateUrl: './categories-subpage.html',
   styleUrl: './categories-subpage.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     provideIcons({
       category: lucideList,
