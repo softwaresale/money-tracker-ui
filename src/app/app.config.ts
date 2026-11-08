@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners, isDevMode } from '@angular/core';
 import { provideRouter, withComponentInputBinding, withRouterConfig } from '@angular/router';
 import { UserManagerSettings } from 'oidc-client-ts';
 import { initOidc, OIDC_ROUTES, authzTokenInterceptor } from '@edgeflare/ngx-oidc';
@@ -6,6 +6,7 @@ import { initOidc, OIDC_ROUTES, authzTokenInterceptor } from '@edgeflare/ngx-oid
 import { routes } from './app.routes';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideDefaultClient } from '@api-client';
+import { provideServiceWorker } from '@angular/service-worker';
 
 const oidcConfig: UserManagerSettings = {
   authority: 'https://salefamily-hdmlgu.us1.zitadel.cloud/',
@@ -36,6 +37,9 @@ export const appConfig: ApplicationConfig = {
 
     provideDefaultClient({
       basePath: '',
-    }),
+    }), provideServiceWorker('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            registrationStrategy: 'registerWhenStable:30000'
+          }),
   ]
 };
