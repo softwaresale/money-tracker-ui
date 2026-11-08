@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { ExpenseCategoryPercentage } from '@api-client';
 import { HlmSliderImports } from '@spartan-ng/helm/slider';
 
@@ -6,6 +6,7 @@ import { HlmSliderImports } from '@spartan-ng/helm/slider';
   selector: 'app-percentages',
   imports: [HlmSliderImports, ],
   templateUrl: './percentages.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './percentages.css',
 })
 export class Percentages {

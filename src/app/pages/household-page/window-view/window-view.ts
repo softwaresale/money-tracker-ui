@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, linkedSignal, signal } from '@angular/core';
+import { Component, computed, inject, input, linkedSignal, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ExpenseWindow, FixedExpenseInstance, VariableExpense, VariableExpenseService } from '@api-client';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmTypographyImports } from "@spartan-ng/helm/typography";
@@ -18,6 +18,7 @@ import { toast } from '@spartan-ng/brain/sonner';
   imports: [HlmButton, HlmTypographyImports, ExpenseList, DatePipe, HlmTabsImports, RouterLink, HlmIcon, NgIcon, ActionBox, ActionBoxAction, SummarySubpage],
   templateUrl: './window-view.html',
   styleUrl: './window-view.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     provideIcons({
       add: lucidePlusCircle,

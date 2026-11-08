@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { WindowSettle, WindowSettlementService } from '@api-client';
 import { HlmH3, HlmLead } from "@spartan-ng/helm/typography";
 import { PaymentCard } from "./payment-card/payment-card";
@@ -17,6 +17,7 @@ import { toast } from '@spartan-ng/brain/sonner';
   imports: [DatePipe, HlmH3, HlmLead, PaymentCard, UserContributionCard, HlmButton, HlmIcon, NgIcon, HlmSpinner],
   templateUrl: './settle-view.html',
   styleUrl: './settle-view.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     provideIcons({
       settleUp: lucideWalletCards

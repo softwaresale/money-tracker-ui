@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { WindowSummaryResource } from '@api-client';
 import { WindowSummaryView } from "../../../../shared/window-summary-view/window-summary-view";
 import { HlmSpinner } from "@spartan-ng/helm/spinner";
@@ -7,6 +7,7 @@ import { HlmSpinner } from "@spartan-ng/helm/spinner";
   selector: 'app-summary-subpage',
   imports: [WindowSummaryView, HlmSpinner],
   templateUrl: './summary-subpage.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './summary-subpage.css',
 })
 export class SummarySubpage {

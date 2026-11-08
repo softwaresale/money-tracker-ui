@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { ExpenseItem } from '../../../../shared/expense-item/expense-item';
 import { FixedExpenseInstance, VariableExpense } from '@api-client';
 import { HlmLead } from '@spartan-ng/helm/typography';
@@ -7,6 +7,7 @@ import { HlmLead } from '@spartan-ng/helm/typography';
   selector: 'app-expense-list',
   imports: [ExpenseItem, HlmLead],
   templateUrl: './expense-list.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './expense-list.css',
 })
 export class ExpenseList {

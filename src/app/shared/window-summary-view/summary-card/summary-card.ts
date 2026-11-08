@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 
 @Component({
@@ -7,6 +7,7 @@ import { HlmCardImports } from '@spartan-ng/helm/card';
     HlmCardImports,
   ],
   templateUrl: './summary-card.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './summary-card.css',
 })
 export class SummaryCard {

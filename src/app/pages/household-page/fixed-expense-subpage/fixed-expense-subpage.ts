@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, input, signal, ChangeDetectionStrategy } from '@angular/core';
 
 import { SubpageContainer } from "../../../shared/subpage/subpage-container";
 import { HlmLead } from "@spartan-ng/helm/typography";
@@ -31,6 +31,7 @@ import { CategoryChip } from "../../../shared/category-chip/category-chip";
 ],
   templateUrl: './fixed-expense-subpage.html',
   styleUrl: './fixed-expense-subpage.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     provideIcons({
       add: lucideCirclePlus,

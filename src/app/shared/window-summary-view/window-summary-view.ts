@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { WindowSummary } from '@api-client';
 import { DollarAmountPipe } from "../dollar-amount-pipe";
 import { HlmH4 } from "@spartan-ng/helm/typography";
@@ -10,6 +10,7 @@ import { CategoryTotalTable } from "./category-total-table/category-total-table"
   selector: 'app-window-summary-view',
   imports: [DollarAmountPipe, SummaryCard, LargeFigure, HlmH4, CategoryTotalTable],
   templateUrl: './window-summary-view.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './window-summary-view.css',
 })
 export class WindowSummaryView {

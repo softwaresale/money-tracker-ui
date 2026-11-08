@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
 import { ExpenseCategory } from '@api-client';
 import { HlmLead, HlmH3 } from '@spartan-ng/helm/typography';
 import { HlmSliderImports } from '@spartan-ng/helm/slider';
@@ -8,6 +8,7 @@ import { Percentages } from "./percentages/percentages";
   selector: 'app-category-view',
   imports: [HlmH3, HlmLead, HlmSliderImports, Percentages],
   templateUrl: './category-view.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './category-view.css',
 })
 export class CategoryView {
